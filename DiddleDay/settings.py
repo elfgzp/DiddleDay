@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from ConfigParser import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Config
+my_config = ConfigParser()
+my_config.read(os.path.join(BASE_DIR, 'config.ini'))
+host = my_config.get('server', 'host')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -25,8 +30,9 @@ SECRET_KEY = '64vv4)2-_efn7raftjjwe!pbwlj3sipim^x%fz-2&^&%_s81f='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    host,
+]
 
 # Application definition
 
@@ -71,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DiddleDay.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -81,7 +86,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -101,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -115,8 +118,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, '/Game/static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
+
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'

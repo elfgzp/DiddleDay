@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for DiddleDay project.
 
@@ -19,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Config
 my_config = ConfigParser()
 my_config.read(os.path.join(BASE_DIR, 'config.ini'))
-host = my_config.get('server', 'host')
+HOST = my_config.get('server', 'host')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -31,7 +33,7 @@ SECRET_KEY = '64vv4)2-_efn7raftjjwe!pbwlj3sipim^x%fz-2&^&%_s81f='
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    host,
+    HOST,
 ]
 
 # Application definition
@@ -121,10 +123,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, '/Game/static')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
-
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
+
+QRCODE_PATH = 'media/QRcode/'
+
+QRCODE_LOGO_PATH = 'media/logo.png' if os.path.exists('media/logo.png') else None
+
+STATIC_ROOT = os.path.join(BASE_DIR, '/Game/static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

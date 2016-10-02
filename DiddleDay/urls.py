@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """DiddleDay URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -15,7 +17,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
+from DiddleDay.settings import MEDIA_URL, MEDIA_ROOT
+
+from Game import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^puzzle_page$', views.puzzle_page),
+] + static(MEDIA_URL, document_root=MEDIA_ROOT)  # 设置访问静态文件

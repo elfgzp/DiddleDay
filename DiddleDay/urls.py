@@ -24,5 +24,7 @@ from Game import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^puzzle_page$', views.puzzle_page),
+    url(r'^$', views.index),
+    url(r'^description\.html.*?', views.descriptions),
+    url(r'^step(?P<page>\d+)', views.step),
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)  # 设置访问静态文件

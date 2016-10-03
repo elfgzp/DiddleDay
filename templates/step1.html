@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>Sunday Offline Puzzle Game</title>
+        <link rel="stylesheet" href="css/frozen.css">
+    </head>
+    <body ontouchstart="">
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>通往真相的入口</h1>
+        </header>
+        <footer class="ui-footer ui-footer-btn">
+            <ul class="ui-tiled ui-border-t">
+                <li data-href="description.html" id="problem"><div class="ui-icon-warn">这是什么</div></li>
+            </ul>
+        </footer>
+        <section class="ui-container ui-center">
+            <br>
+            <div id="entry">
+                <ul class="ui-row ui-whitespace">
+                    <li class="ui-col ui-col-100"><p class="ui-txt-justify">欢迎您的光临，勇士！在开始您的旅途前，请回答我一个问题: </p></li>
+                    <li class="ui-col ui-col-100"><p class="ui-txt-justify">暨南大学的英文缩写是什么? (请使用大写字母回答)</p></li>
+                </ul>
+                <br>
+                <div class="ui-form ui-border-t">
+                    <form action="#">
+                        <div class="ui-form-item ui-form-item-r ui-border-b">
+                            <input type="text" placeholder="请输入您的答案">
+                            <!-- 若按钮不可点击则添加 disabled 类 -->
+                            <button type="button" class="ui-border-l" id="verify">验证答案</button>
+                            <a href="#" class="ui-icon-close"></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="firstPb" style="display: none">
+                这里显示下一关的问题及下一关线索
+            </div>
+        </section>
+        <script src="lib/zepto.min.js"></script>
+        <script src="js/frozen.js"></script>
+        <script type="text/javascript">
+            // 点x清除输入框内容
+            $(".ui-icon-close").tap(function() {
+                $("input").val("");
+            });
+            // 验证问题答案，错误则顶部弹出提示，正确则弹出对话框
+            var el;
+            $("#verify").tap(function(){
+                var answer = $("input[type='text']").val();
+                console.log(answer);
+                if (answer != "JNU") {
+                    el=$.tips({
+                    content:'Oops! 答案似乎不对呢～再试试看吧 :)',
+                    stayTime:2000,
+                    type:"warn"
+                    })
+                    el.on("tips:hide",function(){
+                        console.log("tips hide");
+                    });
+                }
+                else {
+                    var dia=$.dialog({
+                        title:'太棒了勇士',
+                        content:'恭喜您通过考验！接下来您将会看到下一关的线索以及将要回答的问题，请勇士牢记这些内容，否则探险将无法继续进行下去 :(',
+                        button:["放心吧! 完全没问题～"]
+                    });
+                    // 回答正确之后显示第一个问题和线索
+                    dia.on("dialog:action",function(e){
+                        $("#entry").css("display", "none");
+                        $("#firstPb").css("display", "block");
+                        console.log(e.index)
+                    });
+                    dia.on("dialog:hide",function(e){
+                        console.log("dialog hide")
+                    });
+                }
+            });
+            // 点击底部跳转到游戏说明
+            $("#problem").tap(function() {
+                window.location.href="description.html?back=true";
+            })
+        </script>
+    </body>
+</html>

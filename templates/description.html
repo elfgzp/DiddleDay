@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>Sunday Offline Puzzle Game</title>
+        <link rel="stylesheet" href="css/frozen.css">
+    </head>
+    <body ontouchstart="">
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>游戏说明</h1>
+        </header>
+        <footer class="ui-footer ui-footer-stable ui-btn-group ui-border-t">
+            <button class="ui-btn-lg ui-btn-primary">
+                我又要! 掺埋我玩啊~
+            </button>
+        </footer>
+        <section class="ui-container ui-center">
+            老陈快拿游戏说明来！💩
+        </section>
+        <script src="lib/zepto.min.js"></script>
+        <script src="js/frozen.js"></script>
+        <script type="text/javascript">
+            // 打开
+            $("button").tap(function() {
+                window.location.href="step1.html";
+            });
+            // 如果是从其他页面跳转过来，则显示返回按钮
+            $(function(){
+                var url = location.href;
+                var paraString = url.substring(url.indexOf("?")+1,url.length).split("=");
+                if (paraString[1] == "true") {
+                    var goBack = '<i class="ui-icon-return" onclick="history.back()"></i>';
+                    $("h1").before(goBack);
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>Sunday Offline Puzzle Game</title>
+        <link rel="stylesheet" href="css/frozen.css">
+    </head>
+    <body ontouchstart="">
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>线下解谜游戏</h1>
+        </header>
+        <footer class="ui-footer ui-footer-stable ui-btn-group ui-border-t">
+            <button class="ui-btn-lg" id="what">
+                什么东西?!
+            </button>
+            <button class="ui-btn-lg ui-btn-primary" id="know">
+                当然知道啊!
+            </button>
+        </footer>
+        <section class="ui-notice">
+            <i></i>
+            <p>请问您知道这是一个线下解谜游戏吗?</p>
+        </section>
+        <script src="lib/zepto.min.js"></script>
+        <script src="js/frozen.js"></script>
+        <script type="text/javascript">
+            $("#what").tap(function() {
+                window.location.href="description.html";
+            });
+
+            $("#know").tap(function() {
+                window.location.href="step1.html";
+            });
+        </script>
+    </body>
+</html>

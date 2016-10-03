@@ -18,6 +18,7 @@ class Puzzle(models.Model):
     name = models.CharField(blank=True, null=True, max_length=100, db_column='name', verbose_name='谜题')
     content = models.TextField(blank=True, null=True, db_column='content', verbose_name='内容')
     answer = models.TextField(blank=True, null=True, db_column='answer', verbose_name='答案')
+    next_puzzle_n_hint = models.TextField(blank=True, null=True, db_column='next_puzzle_n_hint', verbose_name='下个谜题和提示')
     qr_code = models.ImageField(blank=True, null=True, db_column='qr_code', verbose_name='二维码', upload_to='QRcode')
     previous_puzzle = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True,
                                         db_column='previous_puzzle',
@@ -53,4 +54,3 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.qr_code:
         if os.path.isfile(instance.qr_code.path):
             os.remove(instance.qr_code.path)
-

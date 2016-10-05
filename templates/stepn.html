@@ -81,6 +81,8 @@
                     $(".ui-tab-content").append($clue);
                     scroll.scrollToElement(".ui-tab-content li:nth-child(2)", 0, true, false);
                     scroll.disable();
+                    // 返回数据给服务器记录通关人数
+                    $.getJSON('add_solve_times?link_uuid={{ puzzle.link_uuid }}');
                 }
             });
             // 点击底部跳转到游戏说明

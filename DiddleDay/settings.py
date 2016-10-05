@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 my_config = ConfigParser()
 my_config.read(os.path.join(BASE_DIR, 'config.ini'))
 HOST = my_config.get('server', 'host')
+PORT = my_config.get('server', 'port')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/

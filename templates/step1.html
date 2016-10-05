@@ -36,7 +36,19 @@
                 </div>
             </div>
             <div id="firstPb" style="display: none">
-                这里显示下一关的问题及下一关线索
+                {% if has_first_puzzle %}
+                <p>
+                {{ first_puzzle.story_description }}
+                </p>
+                <p>
+                {{ first_puzzle.content }}
+                </p>
+                <p>
+                {{ first_puzzle.next_puzzle_n_hint }}
+                </p>
+                {% else %}
+                    <p>游戏暂时没有开始</p>
+                {% endif %}
             </div>
         </section>
         <script src="/static/lib/zepto.min.js"></script>

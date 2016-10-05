@@ -9,7 +9,7 @@
     </head>
     <body ontouchstart="">
         <header class="ui-header ui-header-positive ui-border-b">
-            <h1>{{ title }}</h1>
+            <h1>{{ puzzle.name }}</h1>
         </header>
         <footer class="ui-footer ui-footer-btn">
             <ul class="ui-tiled ui-border-t">
@@ -21,11 +21,15 @@
             <div class="ui-scroller">
                 <ul class="ui-tab-content" style="width:200%">
                     <li id="clue" style="visibility: hidden">
-                        {{ next_clue }}这里是下一题的问题及线索
-                    </li>
+                        <p>
+                            {{ puzzle.content }}
+                        </p>
+                        <p>
+                            {{ puzzle.next_puzzle_n_hint }}
+                        </p>
                     <li>
                         <ul class="ui-row ui-whitespace">
-                            <li class="ui-col ui-col-100"><p class="ui-txt-justify">{{ description }}这里是剧情描述或者别的什么(可为空)</p></li>
+                            <li class="ui-col ui-col-100"><p class="ui-txt-justify">{{ puzzle.story_description }}</p></li>
                         </ul>
                         <br>
                         <div class="ui-form ui-border-t">
@@ -62,7 +66,7 @@
             $("#verify").tap(function(){
                 var answer = $("input[type='text']").val();
                 console.log(answer);
-                if (answer != "{{ answer }}") {
+                if (answer != "{{ puzzle.previous_puzzle.answer }}") {
                     el=$.tips({
                     content:'Oops! 答案似乎不对呢～再试试看吧 :)',
                     stayTime:2000,

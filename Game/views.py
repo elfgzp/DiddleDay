@@ -61,6 +61,7 @@ def add_solve_times(request):
             if puzzle:
                 if puzzle.previous_puzzle:
                     puzzle.previous_puzzle.solve_times += 1
+                    super(Puzzle, puzzle.previous_puzzle).save()
                     return HttpResponse('{status:1}')
                 else:
                     return HttpResponse('{status:0, error:"Can not find previous puzzle!"')

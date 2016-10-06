@@ -20,17 +20,17 @@ class Puzzle(models.Model):
                                  db_column='link_uuid',
                                  verbose_name='唯一识别码')
     name = models.CharField(blank=True, null=True, max_length=100, db_column='name', verbose_name='谜题')
-    content = models.TextField(blank=True, null=True, db_column='content', verbose_name='内容')
-    answer = models.TextField(blank=True, null=True, db_column='answer', verbose_name='答案')
-    next_puzzle_n_hint = models.TextField(blank=True, null=True, db_column='next_puzzle_n_hint',
-                                          verbose_name='下个二维码的提示')
-    story_description = models.TextField(blank=True, null=True, db_column='story_description', verbose_name='剧情')
+    story_description = models.TextField(blank=True, null=True, db_column='story_description', verbose_name='该二维码的内容')
+    content = models.TextField(blank=True, null=True, db_column='content', verbose_name='该二维码的问题')
+    answer = models.TextField(blank=True, null=True, db_column='answer', verbose_name='该问题的答案')
+    hint = models.TextField(blank=True, null=True, db_column='hint',
+                            verbose_name='该二维码的位置提示')
     qr_code = models.ImageField(blank=True, null=True, db_column='qr_code', verbose_name='二维码', upload_to='QRcode')
     qr_code_host_n_port = models.CharField(blank=True, null=True, max_length=100, db_column='qr_code_host_n_port',
                                            verbose_name='二维码存储的域名和地址')
-    previous_puzzle = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True,
-                                        db_column='previous_puzzle',
-                                        verbose_name='前一个谜题')
+    previous_puzzle = models.OneToOneField('self', models.DO_NOTHING, blank=True, null=True,
+                                           db_column='previous_puzzle',
+                                           verbose_name='前一个谜题')
     solve_times = models.IntegerField(blank=True, null=True, default=0, db_column='solve_times', verbose_name='通关人数')
 
     def __unicode__(self):

@@ -24,9 +24,11 @@
                         <p>
                             {{ puzzle.content }}
                         </p>
-                        <p>
-                            {{ puzzle.next_puzzle_n_hint }}
-                        </p>
+                        {% if puzzle.puzzle %}
+                            {% if puzzle.puzzle.hint %}
+                                {{ puzzle.puzzle.hint }}
+                            {% endif %}
+                        {% endif %}
                     <li>
                         <ul class="ui-row ui-whitespace">
                             <li class="ui-col ui-col-100"><p class="ui-txt-justify">{{ puzzle.story_description }}</p></li>

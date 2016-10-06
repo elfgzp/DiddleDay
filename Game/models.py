@@ -8,7 +8,11 @@ from django.dispatch import receiver
 from django.core.files import File
 import uuid
 from Game.qrCode import generate_qrcode
-from DiddleDay.settings import HOST, QRCODE_PATH, QRCODE_LOGO_PATH
+from DiddleDay.settings import BASE_DIR, HOST, PORT, QRCODE_PATH, QRCODE_LOGO_PATH
+import logging.config
+
+logging.config.fileConfig(BASE_DIR + '/config.ini')
+game_log = logging.getLogger('game_log')
 
 
 class Puzzle(models.Model):
@@ -18,8 +22,12 @@ class Puzzle(models.Model):
     name = models.CharField(blank=True, null=True, max_length=100, db_column='name', verbose_name='谜题')
     content = models.TextField(blank=True, null=True, db_column='content', verbose_name='内容')
     answer = models.TextField(blank=True, null=True, db_column='answer', verbose_name='答案')
-    next_puzzle_n_hint = models.TextField(blank=True, null=True, db_column='next_puzzle_n_hint', verbose_name='下个谜题和提示')
+    next_puzzle_n_hint = models.TextField(blank=True, null=True, db_column='next_puzzle_n_hint',
+                                          verbose_name='下个二维码的提示')
+    story_description = models.TextField(blank=True, null=True, db_column='story_description', verbose_name='剧情')
     qr_code = models.ImageField(blank=True, null=True, db_column='qr_code', verbose_name='二维码', upload_to='QRcode')
+    qr_code_host_n_port = models.CharField(blank=True, null=True, max_length=100, db_column='qr_code_host_n_port',
+                                           verbose_name='二维码存储的域名和地址')
     previous_puzzle = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True,
                                         db_column='previous_puzzle',
                                         verbose_name='前一个谜题')
@@ -34,23 +42,60 @@ class Puzzle(models.Model):
         db_table = 'puzzle'
 
     def save(self, *args, **kwargs):
-        link_uuid = str(uuid.uuid1())
-        self.link_uuid = link_uuid
-        url = HOST + '/puzzle_page?link_uuid=' + link_uuid
-        image_file = File(open(generate_qrcode(url, QRCODE_LOGO_PATH, QRCODE_PATH,
-                                               '%s.png' % link_uuid), 'r'))
-        image_file = File(image_file)
-        self.qr_code = image_file
-        super(self.__class__, self).save(*args, **kwargs)
-        os.remove(image_file.name)
+        try:
+            _ = Puzzle.objects.filter(link_uuid=self.link_uuid).first()
+            if not _:
+                link_uuid = str(uuid.uuid1())
+                self.link_uuid = link_uuid
+                self.qr_code_host_n_port = '%s:%s' % (HOST, PORT)
+                url = self.qr_code_host_n_port + '/step_n?link_uuid=' + link_uuid
+                image_file = File(open(generate_qrcode(url, QRCODE_LOGO_PATH, QRCODE_PATH,
+                                                       '%s.png' % link_uuid), 'r'))
+                image_file = File(image_file)
+                self.qr_code = image_file
+            super(self.__class__, self).save(*args, **kwargs)
+            if not _:
+                os.remove(image_file.name)
+        except Exception as e:
+            game_log.exception(e)
 
 
 # These two auto-delete files from filesystem when they are unneeded:
 @receiver(models.signals.post_delete, sender=Puzzle)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
-    """Deletes file from filesystem
-    when corresponding `MediaFile` object is deleted.
-    """
-    if instance.qr_code:
-        if os.path.isfile(instance.qr_code.path):
-            os.remove(instance.qr_code.path)
+    try:
+        """Deletes file from filesystem
+            when corresponding `MediaFile` object is deleted.
+            """
+        if instance.qr_code:
+            if os.path.isfile(instance.qr_code.path):
+                os.remove(instance.qr_code.path)
+    except Exception as e:
+        game_log.exception(e)
+
+
+def check_qrcode():
+    try:
+        host_n_port = '%s:%s' % (HOST, PORT)
+        all_puzzle = Puzzle.objects.filter().all()
+        if all_puzzle:
+            for each_puzzle in all_puzzle:
+                if each_puzzle.qr_code_host_n_port != host_n_port:
+                    url = '%s:%s' % (HOST, PORT) + '/step_n?link_uuid=' + each_puzzle.link_uuid
+                    image_file = File(open(generate_qrcode(url, QRCODE_LOGO_PATH, QRCODE_PATH,
+                                                           '%s.png' % each_puzzle.link_uuid), 'r'))
+                    image_file = File(image_file)
+                    each_puzzle.qr_code = image_file
+                    each_puzzle.qr_code_host_n_port = host_n_port
+                    super(Puzzle, each_puzzle).save()
+                    os.remove(image_file.name)
+    except Exception as e:
+        game_log.exception(e)
+
+
+def generate_index_qrcode():
+    generate_qrcode('%s:%s' % (HOST, PORT), QRCODE_LOGO_PATH, QRCODE_PATH, 'first_puzzle.png')
+
+
+generate_index_qrcode()
+check_qrcode()

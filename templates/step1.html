@@ -36,19 +36,25 @@
                 </div>
             </div>
             <div id="firstPb" style="display: none">
-                {% if has_first_puzzle %}
-                <p>
-                {{ first_puzzle.story_description }}
-                </p>
-                <p>
-                {{ first_puzzle.content }}
-                </p>
-                <p>
-                {{ first_puzzle.next_puzzle_n_hint }}
-                </p>
-                {% else %}
-                    <p>游戏暂时没有开始</p>
-                {% endif %}
+                <ul class="ui-row ui-whitespace">
+                    {% if has_first_puzzle %}
+                    <li class="ui-col ui-col-100">
+                        <p class="ui-txt-justify">{{ first_puzzle.story_description }}</p>
+                    </li>
+                    <li><p>&nbsp;</p></li>
+                    <li class="ui-col ui-col-100">
+                        <p class="ui-txt-justify">下一关的问题: {{ first_puzzle.content }}</p>
+                    </li>
+                    <li><p>&nbsp;</p></li>
+                    <li>
+                        <p class="ui-txt-justify">下一关的位置提示: {{ first_puzzle.hint }}</p>
+                    </li>
+                    {% else %}
+                    <li>
+                        <p class="ui-txt-justify">游戏暂时没有开始</p>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </section>
         <script src="/static/lib/zepto.min.js"></script>

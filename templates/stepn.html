@@ -21,17 +21,22 @@
             <div class="ui-scroller">
                 <ul class="ui-tab-content" style="width:200%">
                     <li id="clue" style="visibility: hidden">
-                        <p>
-                            {{ puzzle.content }}
-                        </p>
-                        {% if puzzle.puzzle %}
-                            {% if puzzle.puzzle.hint %}
-                                {{ puzzle.puzzle.hint }}
+                        <ul class="ui-row ui-whitespace">
+                            <li class="ui-col ui-col-100">
+                                <p class="ui-txt-justify">下一关的问题: {{ puzzle.content }}</p>
+                            </li>
+                            <li><p>&nbsp;</p></li>
+                            {% if puzzle.puzzle %}
+                                {% if puzzle.puzzle.hint %}
+                                    <li>
+                                        <p class="ui-txt-justify">下一关的位置提示: {{ puzzle.hint }}</p>
+                                    </li>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
+                        </ul>
                     <li>
                         <ul class="ui-row ui-whitespace">
-                            <li class="ui-col ui-col-100"><p class="ui-txt-justify">{{ puzzle.story_description }}</p></li>
+                            <li id="preAns" class="ui-col ui-col-100"><p class="ui-txt-justify">{{ puzzle.story_description }}</p></li>
                         </ul>
                         <br>
                         <div class="ui-form ui-border-t">
@@ -62,7 +67,7 @@
                 bounce: false
             });
             scroll.disable();
-            scroll.scrollToElement(".ui-tab-content li:nth-child(2)", 0, true, false);
+            scroll.scrollToElement("#preAns", 0, true, false);
             // 验证问题答案，错误则顶部弹出提示，正确则弹出对话框
             var el;
             $("#verify").tap(function(){
@@ -85,7 +90,7 @@
                     $("#clue").remove();
                     $clue.css("visibility", "visible");
                     $(".ui-tab-content").append($clue);
-                    scroll.scrollToElement(".ui-tab-content li:nth-child(2)", 0, true, false);
+                    scroll.scrollToElement("#clue", 0, true, false);
                     scroll.disable();
                     // 返回数据给服务器记录通关人数
                     $.getJSON('add_solve_times?link_uuid={{ puzzle.link_uuid }}');

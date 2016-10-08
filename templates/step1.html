@@ -20,8 +20,11 @@
             <br>
             <div id="entry">
                 <ul class="ui-row ui-whitespace">
-                    <li class="ui-col ui-col-100"><p class="ui-txt-justify">欢迎您的光临，勇士！在开始您的旅途前，请回答我一个问题: </p></li>
-                    <li class="ui-col ui-col-100"><p class="ui-txt-justify">暨南大学的英文缩写是什么? (请使用大写字母回答)</p></li>
+                    <li class="ui-col ui-col-100"><p class="ui-txt-justify">{{ first_puzzle.story_description }}</p></li>
+                    <li><p>&nbsp;</p></li>
+                    <li class="ui-col ui-col-100">
+                        <p class="ui-txt-justify">请回答这个问题: {{ first_puzzle.content }}</p>
+                    </li>
                 </ul>
                 <br>
                 <div class="ui-form ui-border-t">
@@ -42,16 +45,16 @@
             <div id="firstPb" style="display: none">
                 <ul class="ui-row ui-whitespace">
                     {% if has_first_puzzle %}
+                    <!--<li class="ui-col ui-col-100">-->
+                        <!--<p class="ui-txt-justify">{{ first_puzzle.story_description }}</p>-->
+                    <!--</li>-->
+                    <!--<li><p>&nbsp;</p></li>-->
                     <li class="ui-col ui-col-100">
-                        <p class="ui-txt-justify">{{ first_puzzle.story_description }}</p>
-                    </li>
-                    <li><p>&nbsp;</p></li>
-                    <li class="ui-col ui-col-100">
-                        <p class="ui-txt-justify">下一关的问题: {{ first_puzzle.content }}</p>
+                        <p class="ui-txt-justify">下一关的问题: 从数据库取下一关的问题{{ next_puzzle.content }}</p>
                     </li>
                     <li><p>&nbsp;</p></li>
                     <li>
-                        <p class="ui-txt-justify">下一关的位置提示: {{ first_puzzle.hint }}</p>
+                        <p class="ui-txt-justify">下一关的位置提示: 从数据库取下一关的位置{{ next_puzzle.hint }}</p>
                     </li>
                     {% else %}
                     <li>
@@ -73,7 +76,7 @@
             $("#verify").tap(function(){
                 var answer = $("input[type='text']").val();
                 console.log(answer);
-                if (answer != "JNU") {
+                if (answer != "{{ first_puzzle.answer }}") {
                     el=$.tips({
                     content:'Oops! 答案似乎不对呢～再试试看吧 :)',
                     stayTime:2000,

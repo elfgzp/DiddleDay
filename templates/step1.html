@@ -50,11 +50,11 @@
                     <!--</li>-->
                     <!--<li><p>&nbsp;</p></li>-->
                     <li class="ui-col ui-col-100">
-                        <p class="ui-txt-justify">下一关的问题: 从数据库取下一关的问题{{ next_puzzle.content }}</p>
+                        <p class="ui-txt-justify">{{ first_puzzle.puzzle.content }}</p>
                     </li>
                     <li><p>&nbsp;</p></li>
                     <li>
-                        <p class="ui-txt-justify">下一关的位置提示: 从数据库取下一关的位置{{ next_puzzle.hint }}</p>
+                        <p class="ui-txt-justify">{{ first_puzzle.puzzle.hint }}</p>
                     </li>
                     {% else %}
                     <li>
@@ -81,12 +81,14 @@
                     content:'Oops! 答案似乎不对呢～再试试看吧 :)',
                     stayTime:2000,
                     type:"warn"
-                    })
+                    });
                     el.on("tips:hide",function(){
                         console.log("tips hide");
                     });
                 }
                 else {
+                    // 返回数据给服务器记录通关人数
+                    $.getJSON('add_solve_times?link_uuid={{ first_puzzle.link_uuid }}');
                     var dia=$.dialog({
                         title:'太棒了勇士',
                         content:'恭喜您通过考验！接下来您将会看到下一关的线索以及将要回答的问题，请勇士牢记这些内容，否则探险将无法继续进行下去 :(',

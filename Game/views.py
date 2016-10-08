@@ -59,12 +59,9 @@ def add_solve_times(request):
         if link_uuid:
             puzzle = Puzzle.objects.filter(link_uuid=link_uuid).first()
             if puzzle:
-                if puzzle.previous_puzzle:
-                    puzzle.previous_puzzle.solve_times += 1
-                    super(Puzzle, puzzle.previous_puzzle).save()
-                    return HttpResponse('{status:1}')
-                else:
-                    return HttpResponse('{status:0, error:"Can not find previous puzzle!"')
+                puzzle.solve_times += 1
+                super(Puzzle, puzzle).save()
+                return HttpResponse('{status:1}')
             else:
                 return HttpResponse('{status:0, error:"Can not find puzzle!"')
     except Exception as e:

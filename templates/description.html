@@ -13,7 +13,7 @@
         </header>
         <footer class="ui-footer ui-footer-stable ui-btn-group ui-border-t">
             <button class="ui-btn-lg ui-btn-primary">
-                我又要! 掺埋我玩啊~
+                好的! 我明白辣~
             </button>
         </footer>
         <section class="ui-container ui-center">
@@ -22,14 +22,20 @@
         <script src="/static/lib/zepto.min.js"></script>
         <script src="/static/js/frozen.js"></script>
         <script type="text/javascript">
+            // 获取链接变量
+            var url = location.href;
+            var paraString = url.substring(url.indexOf("?")+1,url.length).split("=");
             // 打开
             $("button").tap(function() {
-                window.location.href="step1.html";
+                if (paraString[1] == "true") {
+                    history.back();
+                }
+                else {
+                    window.location.href="step1.html";
+                }
             });
             // 如果是从其他页面跳转过来，则显示返回按钮
             $(function(){
-                var url = location.href;
-                var paraString = url.substring(url.indexOf("?")+1,url.length).split("=");
                 if (paraString[1] == "true") {
                     var goBack = '<i class="ui-icon-return" onclick="history.back()"></i>';
                     $("h1").before(goBack);

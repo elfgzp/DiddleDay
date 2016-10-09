@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>Comming soon...</title>
+        <link rel="stylesheet" href="/static/css/frozen.css">
+        <!--[if IE]><script type="text/javascript" src="http://7xnrsp.com1.z0.glb.clouddn.com/excanvas.js"></script><![endif]-->
+        <script type="text/javascript" src="http://7xnrsp.com1.z0.glb.clouddn.com/jquery-1.11.0.min.js"></script>
+        <script src="http://7xnrsp.com1.z0.glb.clouddn.com/jquery.knob.min.js"></script>
+        <script src="http://7xnrsp.com1.z0.glb.clouddn.com/jquery.ba-throttle-debounce.min.js"></script>
+        <script src="http://7xnrsp.com1.z0.glb.clouddn.com/jq.redcountdown.js"></script>
+    </head>
+    <body style="background: black">
+        <section class="ui-container ui-center">
+            <div>
+                <ul class="ui-row ui-whitespace">
+                    <li class="ui-col ui-col-100"><h1 class="ui-txt-justify ui-txt-white">COMMING SOON...</h1></li>
+                </ul>
+            </div>
+            <div id="rC_PK" class="redCountdownDemo ui-placehold"></div>
+        </section>
+        <footer class="ui-footer ui-center">
+            <p class="ui-txt-white">©SundayStart 2016.</p>
+        </footer>
+    </body>
+    <script type="text/javascript">
+        $('#rC_PK').redCountdown({ preset: "white-black", end: $.now() + {{ left_time }} });
+    </script>
 </html>

@@ -10,13 +10,13 @@ import time
 logging.config.fileConfig(BASE_DIR + '/config.ini')
 game_log = logging.getLogger('game_log')
 
-end_time = "2016-10-10 00:00:00"
-end_time_s = time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S"))
 
 def index(request):
+    start_time = "2016-10-10 00:00:00"
+    start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))
     try:
-        if end_time_s - time.time() > 0:
-            return render(request, 'countdown.html', {'left_time': end_time_s - time.time()})
+        if start_time_s - time.time() > 0:
+            return render(request, 'countdown.html', {'left_time': start_time_s - time.time()})
         return render(request, 'index.html', locals())
     except Exception as e:
         game_log.exception(e)

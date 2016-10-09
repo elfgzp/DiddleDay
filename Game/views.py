@@ -5,13 +5,18 @@ from django.http import HttpResponse
 from DiddleDay.settings import BASE_DIR
 from Game.models import Puzzle
 import logging.config
+import time
 
 logging.config.fileConfig(BASE_DIR + '/config.ini')
 game_log = logging.getLogger('game_log')
 
 
 def index(request):
+    end_time = "2016-10-10 00:00:00"
+    end_time_s = time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S"))
     try:
+        if end_time_s - time.time() > 0:
+            return render(request, 'countdown.html', {'left_time': end_time_s - time.time()})
         return render(request, 'index.html', locals())
     except Exception as e:
         game_log.exception(e)

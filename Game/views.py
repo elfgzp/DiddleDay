@@ -10,10 +10,10 @@ import time
 logging.config.fileConfig(BASE_DIR + '/config.ini')
 game_log = logging.getLogger('game_log')
 
+end_time = "2016-10-10 00:00:00"
+end_time_s = time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S"))
 
 def index(request):
-    end_time = "2016-10-10 00:00:00"
-    end_time_s = time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S"))
     try:
         if end_time_s - time.time() > 0:
             return render(request, 'countdown.html', {'left_time': end_time_s - time.time()})
@@ -42,6 +42,8 @@ def step_1(request):
 
 def step_n(request):
     try:
+        if end_time_s - time.time() > 0:
+            return render(request, 'countdown.html', {'left_time': end_time_s - time.time()})
         link_uuid = request.GET.get('link_uuid')
         if link_uuid:
             puzzle = Puzzle.objects.filter(link_uuid=link_uuid).first()

@@ -48,7 +48,7 @@ class Puzzle(models.Model):
                 link_uuid = str(uuid.uuid1())
                 self.link_uuid = link_uuid
                 self.qr_code_host_n_port = '%s:%s' % (HOST, PORT)
-                url = self.qr_code_host_n_port + '/step_n?link_uuid=' + link_uuid
+                url = 'http://%s/step_n?link_uuid=%s' % (self.qr_code_host_n_port, link_uuid)
                 image_file = File(open(generate_qrcode(url, QRCODE_LOGO_PATH, QRCODE_PATH,
                                                        '%s.png' % link_uuid), 'r'))
                 image_file = File(image_file)
@@ -81,7 +81,7 @@ def check_qrcode():
         if all_puzzle:
             for each_puzzle in all_puzzle:
                 if each_puzzle.qr_code_host_n_port != host_n_port:
-                    url = '%s:%s' % (HOST, PORT) + '/step_n?link_uuid=' + each_puzzle.link_uuid
+                    url = 'http://%s:%s/step_n?link_uuid=%s' % (HOST, PORT, each_puzzle.link_uuid)
                     image_file = File(open(generate_qrcode(url, QRCODE_LOGO_PATH, QRCODE_PATH,
                                                            '%s.png' % each_puzzle.link_uuid), 'r'))
                     image_file = File(image_file)
@@ -94,7 +94,7 @@ def check_qrcode():
 
 
 def generate_index_qrcode():
-    generate_qrcode('%s:%s' % (HOST, PORT), QRCODE_LOGO_PATH, QRCODE_PATH, 'first_puzzle.png')
+    generate_qrcode('http://%s:%s' % (HOST, PORT), QRCODE_LOGO_PATH, QRCODE_PATH, 'first_puzzle.png')
 
 
 generate_index_qrcode()

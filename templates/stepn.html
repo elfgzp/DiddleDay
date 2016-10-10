@@ -22,14 +22,16 @@
                 <ul class="ui-tab-content" style="width:200%">
                     <li id="clue" style="visibility: hidden">
                         <ul class="ui-row ui-whitespace">
-                            <li class="ui-col ui-col-100">
-                                <p class="ui-txt-justify">下一关的问题: {{ puzzle.content }}</p>
-                            </li>
-                            <li><p>&nbsp;</p></li>
                             {% if puzzle.puzzle %}
+                                {% if puzzle.puzzle.content %}
+                                    <li class="ui-col ui-col-100">
+                                        <p class="ui-txt-justify">下一关的问题: {{ puzzle.puzzle.content }}</p>
+                                    </li>
+                                    <li><p>&nbsp;</p></li>
+                                {% endif %}
                                 {% if puzzle.puzzle.hint %}
                                     <li>
-                                        <p class="ui-txt-justify">下一关的位置提示: {{ puzzle.hint }}</p>
+                                        <p class="ui-txt-justify">下一关的位置提示: {{ puzzle.puzzle.hint }}</p>
                                     </li>
                                 {% endif %}
                             {% endif %}
@@ -42,7 +44,7 @@
                         <div class="ui-form ui-border-t">
                             <form action="#" onkeydown="if(event.keyCode==13){return false;}">
                                 <div class="ui-form-item ui-form-item-r ui-border-b">
-                                    <input type="text" placeholder="请输入上一个问题的答案">
+                                    <input type="text" placeholder="请输入上关问题的答案">
                                     <!-- 若按钮不可点击则添加 disabled 类 -->
                                     <button type="button" class="ui-border-l" id="verify">验证答案</button>
                                     <a href="#" class="ui-icon-close"></a>
@@ -51,7 +53,7 @@
                         </div>
                         <br>
                         <div class="ui-tips ui-tips-success">
-                            <i></i><span>当前已有<label class="ui-label">{{ puzzle.previous_puzzle.solve_times }}</label>人通过这一关</span>
+                            <i></i><span>当前已有<label class="ui-label">{{ puzzle.solve_times }}</label>人通过这一关</span>
                         </div>
                     </li>
                 </ul>
@@ -77,7 +79,7 @@
             $("#verify").tap(function(){
                 var answer = $("input[type='text']").val();
                 console.log(answer);
-                if (answer != "{{ puzzle.previous_puzzle.answer }}") {
+                if (answer != "{{ puzzle.answer }}") {
                     el=$.tips({
                     content:'Oops! 答案似乎不对呢～再试试看吧 :)',
                     stayTime:2000,

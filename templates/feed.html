@@ -6,29 +6,43 @@
     <meta name="format-detection" content="telephone=no">
     <title>Sunday Offline Puzzle Game</title>
     <link rel="stylesheet" href="/static/css/frozen.css">
+    <style>
+        .ui-form-item-textarea {
+          height: 88px;
+            margin-bottom: 16px;
+        }
+        .ui-form-item-textarea textarea {
+            height: 100%;
+          margin-top: 15px;
+          border: none;
+        }
+    </style>
 </head>
-<body>
+<body ontouchstart="">
     <header class="ui-header ui-header-positive ui-border-b">
         <h1>游戏反馈</h1>
     </header>
-    <div class="ui-form ui-border-t">
-        <form method="post">
-            <div class="ui-form-item ui-border-b">
-                <label>
-                    您的邮箱
-                </label>
-                <input type="email" placeholder="邮箱">
-                <a href="#" class="ui-icon-close">
-                </a>
-            </div>
-            <div class="ui-form-item ui-form-item-textarea ui-border-b">
-                <label>
-                    您的反馈
-                </label>
-                <textarea placeholder="我们十分珍视您的反馈，请写下对这个游戏的意见或建议..."></textarea>
-            </div>
-            <button class="ui-btn-lg ui-btn-primary">提交</button>
-        </form>
-    </div>
+    <section class="ui-container ui-center">
+        <div class="ui-form ui-border-t ui-placehold">
+            <form method="post">
+                 {% csrf_token %}
+                <div class="ui-form-item ui-border-b">
+                    <label>
+                        您的邮箱
+                    </label>
+                    <input type="email" placeholder="邮箱">
+                    <a href="#" class="ui-icon-close">
+                    </a>
+                </div>
+                <div class="ui-form-item ui-form-item-textarea ui-border-b">
+                    <label>
+                        您的反馈
+                    </label>
+                    <textarea placeholder="请写下对这个游戏的意见或建议..."></textarea>
+                </div>
+                <button class="ui-btn-lg ui-btn-primary">提交</button>
+            </form>
+        </div>
+    </section>
 </body>
 </html>

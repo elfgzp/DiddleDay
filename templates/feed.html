@@ -20,11 +20,12 @@
 </head>
 <body ontouchstart="">
     <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
         <h1>游戏反馈</h1>
     </header>
     <section class="ui-container ui-center">
         <div class="ui-form ui-border-t ui-placehold">
-            <form method="post">
+            <form method="post" onkeydown="if(event.keyCode==13){return false;}">
                  {% csrf_token %}
                 <div class="ui-form-item ui-border-b">
                     <label>
@@ -45,4 +46,24 @@
         </div>
     </section>
 </body>
+<script src="http://7xnrsp.com1.z0.glb.clouddn.com//didle/lib/zepto.min.js"></script>
+<script src="http://7xnrsp.com1.z0.glb.clouddn.com//didle/js/frozen.js"></script>
+<script>
+// 点x清除输入框内容
+$(".ui-icon-close").tap(function() {
+    $("input").val("");
+});
+    // 成功提交提示
+    var el;
+    $("button").tap(function(){
+        el=$.tips({
+            content:'反馈提交成功!',
+            stayTime:2000,
+            type:"success"
+        });
+        el.on("tips:hide",function(){
+            console.log("tips hide");
+        })
+    });
+</script>
 </html>

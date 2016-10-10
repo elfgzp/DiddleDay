@@ -25,7 +25,7 @@
             <ul class="ui-list ui-list-pure ui-border-tb">
                 <li class="ui-border-t">
                     <h4><span>游戏介绍 </span></h4>
-                    <p class="ui-txt-justify">  公元2016年，一个叫热心人士的沙雕想出了这个游戏，并由雅蠛蝶和小强实现了这个游戏。而你将会成为勇士，面临各种各样的考验，去寻找散落在各处的二维码的线索。</p>
+                    <p class="ui-txt-justify">公元2016年，一个叫热心人士的沙雕想出了这个游戏，并由雅蠛蝶和小强实现了这个游戏。而你将会成为勇士，面临各种各样的考验，去寻找散落在各处的二维码的线索。</p>
                     <p class="ui-txt-justify">「智慧是命运的征服者。」</p>
                     <p class="ui-txt-justify">是摘下那荣耀的桂冠，还是深陷谜题的牢笼之中呢？出发吧，勇者！</p>
                 </li>
@@ -49,9 +49,15 @@
                         </li>
                     </ul>
                 </li>
+                <li class="ui-border-t">
+                    <h4><span>问题反馈 </span></h4>
+                    <p class="ui-txt-justify">如果您在游戏中遇到什么问题，又或者想要提出任何建议，可以发送邮件到下面这个邮箱: </p>
+                    <p class="ui-txt-justify ui-border-l">SundaySunnyRx@gmail.com</p>
+                    <p class="ui-txt-justify">或点击下方的链接到反馈页面提交您的反馈</p>
+                </li>
             </ul>
             <span class="ui-flex ui-flex-pack-center">
-                <i class="ui-icon-comment ui-txt-sub">遇到问题？请给我们提供反馈</i>
+                <i id="feed" class="ui-icon-comment ui-txt-sub">遇到问题？请给我们提供反馈</i>
             </span>
         </section>
         <script src="http://7xnrsp.com1.z0.glb.clouddn.com//didle/lib/zepto.min.js"></script>
@@ -76,6 +82,10 @@
                     $("h1").before(goBack);
                 }
             });
+            // 跳转到反馈页
+            $("#feed").tap(function() {
+                window.location.href = "feed.html";
+            })
         </script>
     </body>
 </html>

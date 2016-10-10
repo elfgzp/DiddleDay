@@ -60,6 +60,20 @@ class Puzzle(models.Model):
             game_log.exception(e)
 
 
+class Feed(models.Model):
+    email = models.CharField(blank=True, null=False, max_length=100, db_column='email', verbose_name='邮箱')
+    content = models.TextField(blank=True, null=True, db_column='content', verbose_name='建议内容')
+    date_time = models.DateTimeField(blank=True, null=False, db_column='date_time', verbose_name='时间', auto_now=True)
+
+    def __unicode__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = '意见建议'
+        verbose_name_plural = verbose_name
+        db_table = 'feed'
+
+
 # These two auto-delete files from filesystem when they are unneeded:
 @receiver(models.signals.post_delete, sender=Puzzle)
 def auto_delete_file_on_delete(sender, instance, **kwargs):

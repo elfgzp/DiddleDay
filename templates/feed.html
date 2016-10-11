@@ -49,21 +49,22 @@
 <script src="http://7xnrsp.com1.z0.glb.clouddn.com//didle/lib/zepto.min.js"></script>
 <script src="http://7xnrsp.com1.z0.glb.clouddn.com//didle/js/frozen.js"></script>
 <script>
-// 点x清除输入框内容
-$(".ui-icon-close").tap(function() {
-    $("input").val("");
-});
+    // 点x清除输入框内容
+    $(".ui-icon-close").tap(function() {
+        $("input").val("");
+    });
     // 成功提交提示
     var el;
-    $("button").tap(function(){
+    var should_show = "{{ submit_success }}";
+    if (should_show == "True") {
         el=$.tips({
-            content:'反馈提交成功!',
-            stayTime:2000,
-            type:"success"
+        content:'反馈提交成功!',
+        stayTime:2000,
+        type:"success"
         });
         el.on("tips:hide",function(){
             console.log("tips hide");
         })
-    });
+    }
 </script>
 </html>

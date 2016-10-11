@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, redirect
+from django.template import RequestContext
 from django.http import HttpResponse
 from DiddleDay.settings import BASE_DIR
-from Game.models import Puzzle
+from Game.models import Puzzle, Feed
 import logging.config
 import time
 
@@ -74,7 +75,14 @@ def step_n(request):
 
 def feed(request):
     try:
-        return render(request, 'feed.html', locals())
+        submit_success = False
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            content = request.POST.get('content')
+            feed_back = Feed(email=email, content=content)
+            feed_back.save()
+            submit_success = True
+        return render(request, 'feed.html', locals(), RequestContext(request))
     except Exception as e:
         game_log.exception(e)
 

@@ -86,7 +86,7 @@
                 if (paraString[1] == "true") {
                     history.back();
                 }
-                else if(paraString[0] != "link_uuid") {
+                else if(paraString[0] == "link_uuid") {
                     window.location.href="step1.html?link_uuid=" + paraString[1];
                 }
             });

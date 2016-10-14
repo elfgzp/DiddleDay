@@ -86,8 +86,8 @@
                 if (paraString[1] == "true") {
                     history.back();
                 }
-                else {
-                    window.location.href="step1.html?link_uuid=6c356462-8ee9-11e6-bd27-525400df04b3";
+                else if(paraString[0] != "link_uuid") {
+                    window.location.href="step1.html?link_uuid=" + paraString[1];
                 }
             });
             // 如果是从其他页面跳转过来，则显示返回按钮

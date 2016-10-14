@@ -6,20 +6,20 @@ from django.http import HttpResponse
 from DiddleDay.settings import BASE_DIR
 from Game.models import Puzzle, Feed
 import logging.config
-import time
+import timeUtil
 
 logging.config.fileConfig(BASE_DIR + '/config.ini')
 game_log = logging.getLogger('game_log')
 
 
 def index(request):
-    start_time = "2016-10-10 00:00:00"
-    start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))
+    # start_time = "2016-10-10 00:00:00"
+    # start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))
     try:
         link_uuid = request.GET.get('link_uuid')
         parameter = '?link_uuid=%s' % link_uuid if link_uuid else ''
-        if start_time_s - time.time() > 0:
-            return render(request, 'countdown.html', {'left_time': start_time_s - time.time()})
+        if not timeUtil.isStart():
+            return render(request, 'countdown.html', {'left_time': timeUtil.leftStartTime()})
         return render(request, 'index.html', locals())
     except Exception as e:
         game_log.exception(e)
@@ -53,10 +53,10 @@ def step_1(request):
 
 def step_n(request):
     try:
-        start_time = "2016-10-10 00:00:00"
-        start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))
-        if start_time_s - time.time() > 0:
-            return render(request, 'countdown.html', {'left_time': start_time_s - time.time()})
+        # start_time = "2016-10-10 00:00:00"
+        # start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))
+        if not timeUtil.isStart():
+            return render(request, 'countdown.html', {'left_time': timeUtil.leftStartTime()})
         link_uuid = request.GET.get('link_uuid')
         if link_uuid:
             puzzle = Puzzle.objects.filter(link_uuid=link_uuid).first()

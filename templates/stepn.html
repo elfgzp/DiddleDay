@@ -22,7 +22,7 @@
                 <ul class="ui-tab-content" style="width:200%">
                     <li id="clue" style="visibility: hidden">
                         <ul class="ui-row ui-whitespace">
-                            {% if puzzle.puzzle %}
+                            {% if puzzle.puzzle.puzzle %}
                                 {% if puzzle.puzzle.content %}
                                     <li class="ui-col ui-col-100">
                                         <p class="ui-txt-justify">下一关的问题: {{ puzzle.puzzle.content }}</p>
@@ -34,6 +34,10 @@
                                         <p class="ui-txt-justify">下一关的位置提示: {{ puzzle.puzzle.hint }}</p>
                                     </li>
                                 {% endif %}
+                            {% else %}
+                                <li class="ui-col ui-col-100">
+                                    <p class="ui-txt-justify">{{ puzzle.puzzle.content }}</p>
+                                </li>
                             {% endif %}
                         </ul>
                     <li>

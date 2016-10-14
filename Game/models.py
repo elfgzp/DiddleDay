@@ -23,8 +23,10 @@ class Puzzle(models.Model):
     story_description = models.TextField(blank=True, null=True, db_column='story_description', verbose_name='该二维码的内容')
     content = models.TextField(blank=True, null=True, db_column='content', verbose_name='该二维码的问题')
     answer = models.TextField(blank=True, null=True, db_column='answer', verbose_name='该问题的答案')
+    game_description = models.TextField(blank=True, null=True, db_column='game_description', verbose_name='该主线的游戏说明',
+                                        default='(只用填第一关就好)')
     hint = models.TextField(blank=True, null=True, db_column='hint',
-                            verbose_name='该二维码的位置提示')
+                            verbose_name='该二维码的位置提示'),
     qr_code = models.ImageField(blank=True, null=True, db_column='qr_code', verbose_name='二维码', upload_to='QRcode')
     qr_code_host_n_port = models.CharField(blank=True, null=True, max_length=100, db_column='qr_code_host_n_port',
                                            verbose_name='二维码存储的域名和地址')

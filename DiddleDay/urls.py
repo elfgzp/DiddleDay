@@ -29,5 +29,7 @@ urlpatterns = [
     url(r'^description\.html.*?', views.descriptions),
     url(r'^step1', views.step_1),
     url(r'^step_n', views.step_n),
+    url(r'^feed.html', views.feed),
     url(r'^add_solve_times', views.add_solve_times),
+    url(r'^Game/uploadImg', views.uploadImg),
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)  # 设置访问静态文件

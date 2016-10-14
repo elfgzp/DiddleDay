@@ -8,6 +8,13 @@ class PuzzleAdmin(admin.ModelAdmin):
     list_display = ('name', 'content', 'previous_puzzle', 'solve_times')
     readonly_fields = ('link_uuid', 'qr_code', 'qr_code_host_n_port')
 
+    class Media:
+        js = (
+            '/static/js/kindeditor-4.1.10/kindeditor.js',
+            '/static/js/kindeditor-4.1.10/lang/zh_CN.js',
+            '/static/js/kindeditor-4.1.10/puzzle_config.js'
+        )
+
 
 class FeedAdmin(admin.ModelAdmin):
     list_display = ('email', 'date_time')

@@ -1,11 +1,13 @@
 #-*- coding: utf-8 -*
 import time
+from DiddleDay.settings import START_TIME, END_TIME
 
-start_time = "2016-10-14 21:00:00"
-start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))
+start_time = START_TIME
+start_time_s = time.mktime(time.strptime(start_time, "%Y-%m-%d/%H:%M:%S"))
 
-end_time = "2016-11-15 23:59:59"
-end_time_s = time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S"))
+end_time = END_TIME
+end_time_s = time.mktime(time.strptime(end_time, "%Y-%m-%d/%H:%M:%S"))
+
 
 # 剩余开始/结束时间
 def leftStartTime():

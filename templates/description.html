@@ -23,53 +23,54 @@
         </footer>
         <section class="ui-container ui-panel ui-panel-pure ui-border-t">
             <ul class="ui-list ui-list-pure ui-border-tb">
-                <li class="ui-border-t">
-                    <h4><span>注意 </span></h4>
-                    <p class="ui-txt-justify">如果你是中途无意中扫描到藏在暨大中的二维码，而并不知道这个游戏是什么，建议你寻找第一个二维码，从第一个二维码开始。关于如何找到第一个二维码的方法请查阅下面的Q&A。
-</p>
-                </li>
-                <li class="ui-border-t">
-                    <h4><span>游戏介绍 </span></h4>
-                    <p class="ui-txt-justify">公元2016年，一个叫热心人士的沙雕想出了这个游戏，并由雅蠛蝶和小强实现了这个游戏。而你将会成为勇士，面临各种各样的考验，去寻找散落在各处的二维码的线索。</p>
-                    <p class="ui-txt-justify">「智慧是命运的征服者。」</p>
-                    <p class="ui-txt-justify">是摘下那荣耀的桂冠，还是深陷谜题的牢笼之中呢？出发吧，勇者！</p>
-                </li>
-                <li class="ui-border-t">
-                    <h4><span>游戏玩法 </span></h4>
-                    <ul class="ui-list ui-list-pure ui-border-tb">
-                        <li class="ui-border-t">
-                            <p class="ui-txt-justify">1. 扫描二维码</p>
-                            <img class="img-fit" src="http://7xnrsp.com1.z0.glb.clouddn.com/sunday/img/jnu.png" alt="">
-                        </li>
-                        <li class="ui-border-t">
-                            <p class="ui-txt-justify">2. 输入正确的答案</p>
-                            <img class="img-fit" src="http://7xnrsp.com1.z0.glb.clouddn.com/sunday/img/2.png" alt="">
-                        </li>
-                        <li class="ui-border-t">
-                            <p class="ui-txt-justify">3. 得到下一关的问题以及下一个二维码位置的提示，请务必记住问题，下一关将不会再次显示</p>
-                            <img class="img-fit" src="http://7xnrsp.com1.z0.glb.clouddn.com/sunday/img/3.png" alt="">
-                        </li>
-                        <li class="ui-border-t">
-                            <p class="ui-txt-justify">4. 找到下一个二维码，重复第一个步骤，直到最后一个线索</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="ui-border-t">
-                    <h4><span>Q & A </span></h4>
-                    <p class="ui-txt-justify">Q：我是无意中扫描藏在暨大中的二维码的，怎样找到第一个二维码？<br>
-                        A：尝试问问朋友，或者在社交平台打听一下关于暨大线下解谜~<br><br>
-                        Q：如果二维码被撕毁，导致我找不到二维码怎么办？<br>
-                        A：在游戏进行期间，我会每天去巡查所有二维码，确保每一个二维码完好，如有撕毁我将会马上补回。如果被撕毁频率太高，我会考虑撤销那个二维码，更新谜题，届时请留意你最近扫描的二维码，问题和线索是否有变动。<br><br>
-                        Q：谜题太难，线索太模糊，让我好难进行游戏，怎么办？<br>
-                        A：尝试找上朋友一起玩，或者在社交平台求助~（但切勿讲第一个二维码以外的二维码发上社交平台哦，那样就失去游戏乐趣了~）
-                    </p>
-                </li>
-                <li class="ui-border-t">
-                    <h4><span>问题反馈 </span></h4>
-                    <p class="ui-txt-justify">如果您在游戏中遇到什么问题，又或者想要提出任何建议，可以发送邮件到下面这个邮箱: </p>
-                    <p class="ui-txt-justify ui-border-l">SundaySunnyRx@gmail.com</p>
-                    <p class="ui-txt-justify">或点击下方的链接到反馈页面提交您的反馈</p>
-                </li>
+                {{ first_puzzle.game_description | safe }}
+{#                <li class="ui-border-t">#}
+{#                    <h4><span>注意 </span></h4>#}
+{#                    <p class="ui-txt-justify">如果你是中途无意中扫描到藏在暨大中的二维码，而并不知道这个游戏是什么，建议你寻找第一个二维码，从第一个二维码开始。关于如何找到第一个二维码的方法请查阅下面的Q&A。#}
+{#</p>#}
+{#                </li>#}
+{#                <li class="ui-border-t">#}
+{#                    <h4><span>游戏介绍 </span></h4>#}
+{#                    <p class="ui-txt-justify">公元2016年，一个叫热心人士的沙雕想出了这个游戏，并由雅蠛蝶和小强实现了这个游戏。而你将会成为勇士，面临各种各样的考验，去寻找散落在各处的二维码的线索。</p>#}
+{#                    <p class="ui-txt-justify">「智慧是命运的征服者。」</p>#}
+{#                    <p class="ui-txt-justify">是摘下那荣耀的桂冠，还是深陷谜题的牢笼之中呢？出发吧，勇者！</p>#}
+{#                </li>#}
+{#                <li class="ui-border-t">#}
+{#                    <h4><span>游戏玩法 </span></h4>#}
+{#                    <ul class="ui-list ui-list-pure ui-border-tb">#}
+{#                        <li class="ui-border-t">#}
+{#                            <p class="ui-txt-justify">1. 扫描二维码</p>#}
+{#                            <img class="img-fit" src="http://7xnrsp.com1.z0.glb.clouddn.com/sunday/img/jnu.png" alt="">#}
+{#                        </li>#}
+{#                        <li class="ui-border-t">#}
+{#                            <p class="ui-txt-justify">2. 输入正确的答案</p>#}
+{#                            <img class="img-fit" src="http://7xnrsp.com1.z0.glb.clouddn.com/sunday/img/2.png" alt="">#}
+{#                        </li>#}
+{#                        <li class="ui-border-t">#}
+{#                            <p class="ui-txt-justify">3. 得到下一关的问题以及下一个二维码位置的提示，请务必记住问题，下一关将不会再次显示</p>#}
+{#                            <img class="img-fit" src="http://7xnrsp.com1.z0.glb.clouddn.com/sunday/img/3.png" alt="">#}
+{#                        </li>#}
+{#                        <li class="ui-border-t">#}
+{#                            <p class="ui-txt-justify">4. 找到下一个二维码，重复第一个步骤，直到最后一个线索</p>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </li>#}
+{#                <li class="ui-border-t">#}
+{#                    <h4><span>Q & A </span></h4>#}
+{#                    <p class="ui-txt-justify">Q：我是无意中扫描藏在暨大中的二维码的，怎样找到第一个二维码？<br>#}
+{#                        A：尝试问问朋友，或者在社交平台打听一下关于暨大线下解谜~<br><br>#}
+{#                        Q：如果二维码被撕毁，导致我找不到二维码怎么办？<br>#}
+{#                        A：在游戏进行期间，我会每天去巡查所有二维码，确保每一个二维码完好，如有撕毁我将会马上补回。如果被撕毁频率太高，我会考虑撤销那个二维码，更新谜题，届时请留意你最近扫描的二维码，问题和线索是否有变动。<br><br>#}
+{#                        Q：谜题太难，线索太模糊，让我好难进行游戏，怎么办？<br>#}
+{#                        A：尝试找上朋友一起玩，或者在社交平台求助~（但切勿讲第一个二维码以外的二维码发上社交平台哦，那样就失去游戏乐趣了~）#}
+{#                    </p>#}
+{#                </li>#}
+{#                <li class="ui-border-t">#}
+{#                    <h4><span>问题反馈 </span></h4>#}
+{#                    <p class="ui-txt-justify">如果您在游戏中遇到什么问题，又或者想要提出任何建议，可以发送邮件到下面这个邮箱: </p>#}
+{#                    <p class="ui-txt-justify ui-border-l">SundaySunnyRx@gmail.com</p>#}
+{#                    <p class="ui-txt-justify">或点击下方的链接到反馈页面提交您的反馈</p>#}
+{#                </li>#}
             </ul>
             <span class="ui-flex ui-flex-pack-center">
                 <i id="feed" class="ui-icon-comment ui-txt-sub">遇到问题？请给我们提供反馈</i>

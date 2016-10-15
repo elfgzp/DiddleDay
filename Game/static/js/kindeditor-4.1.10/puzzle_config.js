@@ -10,7 +10,7 @@ KindEditor.ready(function(K) {
             <!--后台处理上传图片的功url-->
             uploadJson : '/Game/uploadImg',
             items : [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'source', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
                 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 
@@ -23,7 +23,7 @@ KindEditor.ready(function(K) {
             <!--后台处理上传图片的功url-->
             uploadJson : '/Game/uploadImg/',
             items : [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'source', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
                 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 
@@ -36,7 +36,7 @@ KindEditor.ready(function(K) {
             <!--后台处理上传图片的功url-->
             uploadJson : '/Game/uploadImg/',
             items : [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'source', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
                 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 
@@ -49,7 +49,7 @@ KindEditor.ready(function(K) {
             <!--后台处理上传图片的功url-->
             uploadJson : '/Game/uploadImg/',
             items : [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'source', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
                 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 

@@ -23,6 +23,8 @@ my_config = ConfigParser()
 my_config.read(os.path.join(BASE_DIR, 'config.ini'))
 HOST = my_config.get('server', 'host')
 PORT = my_config.get('server', 'port')
+START_TIME = my_config.get('server', 'start_time')
+END_TIME = my_config.get('server', 'end_time')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/

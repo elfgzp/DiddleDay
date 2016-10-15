@@ -32,7 +32,11 @@ def index(request):
 
 def descriptions(request):
     try:
-        return render(request, 'description.html', locals())
+        link_uuid = request.GET.get('link_uuid')
+        if link_uuid:
+            puzzle = Puzzle.objects.filter(link_uuid=link_uuid).first()
+            first_puzzle = get_first_puzzle(puzzle)
+            return render(request, 'description.html', locals())
     except Exception as e:
         game_log.exception(e)
 
@@ -45,12 +49,14 @@ def step_1(request):
             has_first_puzzle = False
             if first_puzzle:
                 has_first_puzzle = True
+            parameter = '&&link_uuid=%s' % link_uuid
             return render(request, 'step1.html', locals())
         else:
             first_puzzle = Puzzle.objects.filter(previous_puzzle=None).first()
             has_first_puzzle = False
             if first_puzzle:
                 has_first_puzzle = True
+                parameter = '&&link_uuid=%s' % first_puzzle.link_uuid
             return render(request, 'step1.html', locals())
     except Exception as e:
         game_log.exception(e)
@@ -67,6 +73,7 @@ def step_n(request):
             puzzle = Puzzle.objects.filter(link_uuid=link_uuid).first()
             if puzzle:
                 if puzzle.previous_puzzle:
+                    parameter = '&&link_uuid=%s' % link_uuid
                     return render(request, 'stepn.html', locals())
                 else:
                     return redirect('index.html?link_uuid=%s' % link_uuid)

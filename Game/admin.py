@@ -5,7 +5,7 @@ from Game.models import *
 
 
 class PuzzleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'content', 'previous_puzzle', 'solve_times')
+    list_display = ('name', 'short_content', 'previous_puzzle', 'solve_times')
     readonly_fields = ('link_uuid', 'qr_code', 'qr_code_host_n_port')
 
     class Media:

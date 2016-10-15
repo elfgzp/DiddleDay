@@ -6,6 +6,7 @@ import os
 from django.db import models
 from django.dispatch import receiver
 from django.core.files import File
+from django.template.defaultfilters import truncatechars
 import uuid
 from Game.qrCode import generate_qrcode
 from DiddleDay.settings import BASE_DIR, HOST, PORT, QRCODE_PATH, QRCODE_LOGO_PATH
@@ -42,6 +43,10 @@ class Puzzle(models.Model):
         verbose_name = '谜题'
         verbose_name_plural = verbose_name
         db_table = 'puzzle'
+
+    @property
+    def short_content(self):
+        return truncatechars(self.content, 15)
 
     def save(self, *args, **kwargs):
         try:
